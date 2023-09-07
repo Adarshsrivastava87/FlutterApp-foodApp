@@ -42,7 +42,6 @@ class UserLogindata extends GetxController {
         Price: item.price,
         name: item.name,
         quantity: item.quantity);
-    // ];
     Cart.add(data);
     print(Cart);
   }
@@ -90,9 +89,7 @@ class UserLogindata extends GetxController {
     var details = new Map();
     details["TotalPrice"] = Total.value;
     details["ProductDetails"] = Cart.toJson();
-    // var totalp = Total.value;
-    // checkoutdata.value = [Cart, totalp];
-    print("calling");
+    //print("calling");
     var url =
         'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Cart.json';
     http.post(
@@ -106,7 +103,7 @@ class UserLogindata extends GetxController {
   }
 
   clearCart() {
-    print("clear cart");
+    //print("clear cart");
     Cart.clear();
     Total.value = "0";
   }
