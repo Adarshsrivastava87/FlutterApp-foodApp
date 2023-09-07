@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:my_app/Src/Appscreens/Dashboard/Homepage.dart';
 import 'package:my_app/Src/Appscreens/LoginScreen/InputBox.dart';
 import 'package:my_app/Src/Appscreens/LoginScreen/login.dart';
-import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
+import 'package:my_app/Src/Appscreens/controllers/Signupcontroller.dart';
 
 class AppSignUpPage extends StatefulWidget {
   const AppSignUpPage({super.key});
@@ -13,7 +13,7 @@ class AppSignUpPage extends StatefulWidget {
 }
 
 class _AppSignUpPageState extends State<AppSignUpPage> {
-  var userdataController = Get.put(UserLogindata());
+  var SignupController = Get.put(Signup());
 
   @override
   Widget build(BuildContext context) {
@@ -30,27 +30,34 @@ class _AppSignUpPageState extends State<AppSignUpPage> {
               child: Image.network(
                   "https://static.vecteezy.com/system/resources/thumbnails/019/900/322/small/happy-young-cute-illustration-face-profile-png.png"),
             ),
-            // TextField(
-            //   decoration: InputDecoration(
-            //       border: OutlineInputBorder(
-            //           borderRadius: BorderRadius.circular(20.0)),
-            //       hintText: "User name",
-            //       prefixIcon: Icon(Icons.card_giftcard_rounded)),
-            // ),
+
             const SizedBox(
               height: 10,
             ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: InputBox(inputText: "username", secureText: false),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: InputBox(
-                inputText: "password",
-                secureText: true,
-              ),
-            ),
+            Padding(
+                padding: EdgeInsets.all(8.0),
+                child: TextField(
+                  // obscureText: secureText,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0)),
+                      hintText: "username or Email",
+                      //suffixIcon: secureText ? Icon(Icons.password) : null,
+                      prefixIcon: Icon(Icons.password)),
+                  onChanged: (v) => SignupController.setnewUsername(v),
+                )),
+            Padding(
+                padding: EdgeInsets.all(8.0),
+                child: TextField(
+                  // obscureText: secureText,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0)),
+                      hintText: "New password",
+                      //suffixIcon: secureText ? Icon(Icons.password) : null,
+                      prefixIcon: Icon(Icons.password)),
+                  onChanged: (v) => SignupController.setnewUserpassword(v),
+                )),
             const SizedBox(
               height: 20,
             ),
@@ -81,11 +88,11 @@ class _AppSignUpPageState extends State<AppSignUpPage> {
                   Icon(Icons.facebook),
                   InkWell(
                       onTap: () async {
-                        await userdataController.login();
-                        if (userdataController.googleAccount.value == null) {
+                        await SignupController.signup();
+                        if (SignupController.googleAccount.value == null) {
                           Get.to(() => AppSignUpPage());
                         } else {
-                          print("${userdataController.googleAccount.value}");
+                          print("${SignupController.googleAccount.value}");
                           Get.to(() => DashBoard());
                         }
                       },
