@@ -61,16 +61,16 @@ class ReviewOrder extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Card(
                           elevation: 5,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              Dispalydata.Detail.FoodDetails,
-                              style: TextStyle(fontSize: 20),
-                            ),
+                            padding: EdgeInsets.all(8.0),
+                            // child: Text(
+                            //   Dispalydata.Detail.FoodDetails,
+                            //   style: TextStyle(fontSize: 20),
+                            // ),
                           ),
                         ),
                       ),
