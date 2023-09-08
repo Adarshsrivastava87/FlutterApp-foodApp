@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Src/Appscreens/Dashboard/Homepage.dart';
 import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
+import 'package:my_app/Src/Appscreens/controllers/Signupcontroller.dart';
 
 class customebutton extends StatefulWidget {
-  const customebutton({super.key});
+  String Button_name;
+  final Function callback;
+  customebutton({super.key, required this.Button_name, required this.callback});
 
   @override
   State<customebutton> createState() => _customebuttonState();
@@ -12,6 +15,7 @@ class customebutton extends StatefulWidget {
 
 class _customebuttonState extends State<customebutton> {
   var userdataController = Get.put(UserLogindata());
+  var SignupController = Get.put(Signup());
   bool change = false;
 //cusstome Alertbox
   showAlertDialog(BuildContext context) {
@@ -57,12 +61,25 @@ class _customebuttonState extends State<customebutton> {
           change = true;
         });
         await Future.delayed(const Duration(seconds: 2));
-        if (userdataController.Username == "" ||
-            userdataController.Userpassword == "") {
-          showAlertDialog(context);
+        if (widget.Button_name == "Signup") {
+          /// Validation for Signup
+          if (SignupController.newusername.value == "" ||
+              SignupController.newuserpassword.value == "") {
+            showAlertDialog(context);
+          } else {
+            widget.callback();
+            Get.off(() => const DashBoard());
+          }
         } else {
-          userdataController.login();
-          Get.off(() => const DashBoard());
+          /// validation for Login
+
+          if (userdataController.Username == "" ||
+              userdataController.Userpassword == "") {
+            showAlertDialog(context);
+          } else {
+            widget.callback();
+            Get.off(() => const DashBoard());
+          }
         }
       },
       child: AnimatedContainer(
@@ -78,8 +95,8 @@ class _customebuttonState extends State<customebutton> {
                 Icons.done,
                 color: Colors.black,
               )
-            : const Text(
-                "Login",
+            : Text(
+                widget.Button_name,
                 style: TextStyle(fontSize: 20, color: Colors.black),
               ),
       ),

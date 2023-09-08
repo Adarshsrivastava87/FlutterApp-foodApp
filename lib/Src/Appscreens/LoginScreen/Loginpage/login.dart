@@ -72,7 +72,10 @@ class _ApploginPageState extends State<ApploginPage> {
               ],
             ),
 
-            const customebutton(),
+            customebutton(
+              Button_name: "Login",
+              callback: () => userdataController.login(),
+            ),
             // Obx(() => Text("${userdataController.Username}")),
             const Text("---------- OR ----------"),
             Padding(

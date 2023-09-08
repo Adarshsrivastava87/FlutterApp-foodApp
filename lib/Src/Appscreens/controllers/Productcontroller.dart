@@ -16,7 +16,9 @@ class UserLogindata extends GetxController {
   var googleAccount = Rx<GoogleSignInAccount?>(null);
 
   login() async {
-    googleAccount.value = await _googlsignin.signIn();
+    //googleAccount.value = await _googlsignin.signIn();
+
+    print("Login function called");
   }
 
   Fetchdata() async {
