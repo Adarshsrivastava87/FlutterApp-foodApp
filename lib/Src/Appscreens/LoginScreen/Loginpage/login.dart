@@ -54,7 +54,7 @@ class _ApploginPageState extends State<ApploginPage> {
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 5,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

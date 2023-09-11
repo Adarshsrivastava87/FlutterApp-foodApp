@@ -78,7 +78,7 @@ class _AppSignUpPageState extends State<AppSignUpPage> {
                 ),
 
                 const SizedBox(
-                  height: 20,
+                  height: 5,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
