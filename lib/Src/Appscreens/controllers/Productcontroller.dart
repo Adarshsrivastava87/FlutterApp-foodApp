@@ -17,8 +17,25 @@ class UserLogindata extends GetxController {
 
   login() async {
     //googleAccount.value = await _googlsignin.signIn();
+    List<Map> data = [];
+    Map user = {
+      "displayName": googleAccount.value?.displayName,
+      "email": googleAccount.value?.email,
+      "id": googleAccount.value?.id,
+      "photoUrl": googleAccount.value?.photoUrl
+    };
+    data.add(user);
 
-    print("Login function called");
+    print("Login function called ${googleAccount.value?.displayName}");
+    var url =
+        'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/User.json';
+    http.post(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(data),
+    );
   }
 
   Fetchdata() async {
@@ -88,19 +105,23 @@ class UserLogindata extends GetxController {
 
   BuyProduct() {
     var details = new Map();
-    details["TotalPrice"] = Total.value;
-    details["ProductDetails"] = Cart.toJson();
-    //print("calling");
-    var url =
-        'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Cart.json';
-    http.post(
-      Uri.parse(url),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(details),
-    );
-    return clearCart();
+    if (Cart.isNotEmpty) {
+      details["TotalPrice"] = Total.value;
+      details["ProductDetails"] = Cart.toJson();
+      //print("calling");
+      var url =
+          'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Cart.json';
+      http.post(
+        Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(details),
+      );
+      return clearCart();
+    } else {
+      return;
+    }
   }
 
   clearCart() {
