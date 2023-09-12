@@ -4,8 +4,6 @@
 
 import 'dart:convert';
 
-import 'package:my_app/Modal/modal.dart';
-
 List<Products> productsFromJson(String str) =>
     List<Products>.from(json.decode(str).map((x) => Products.fromJson(x)));
 

@@ -1,17 +1,12 @@
-import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:http/http.dart' as http;
-import 'package:my_app/Modal/modal.dart';
-import 'package:my_app/Src/Appscreens/Dashboard/Homepage.dart';
 
 class Signup extends GetxController {
   var newusername = "".obs;
   var newuserpassword = "".obs;
   final RxBool showpassword = true.obs;
 
-  var _googlsignin = GoogleSignIn();
+  //var _googlsignin = GoogleSignIn();
   var googleAccount = Rx<GoogleSignInAccount?>(null);
 
   setshowpassword(data) {
@@ -37,8 +32,7 @@ class Signup extends GetxController {
         {"name": newusername.value, "password": newuserpassword.value}.obs;
 
     arry.add(userData);
-    var url =
-        'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Newusers.json';
+    //var url ='https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Newusers.json';
     // http.post(
     //   Uri.parse(url),
     //   headers: <String, String>{

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Src/Appscreens/Details/detailpage.dart';
-import 'package:my_app/Src/Appscreens/LoginScreen/Userloginstate.dart';
 import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
 
 // ignore: must_be_immutable

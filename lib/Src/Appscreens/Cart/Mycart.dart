@@ -12,49 +12,6 @@ class MyCart extends StatefulWidget {
 class _MyCartState extends State<MyCart> {
   var controller = Get.put(UserLogindata());
   //=====
-
-  showAlertDialog(BuildContext context) {
-    // set up the buttons
-    Widget cancelButton = TextButton(
-      child: const Text("Cancel"),
-      onPressed: () {
-        Navigator.pop(context, true);
-      },
-    );
-    Widget continueButton = TextButton(
-      child: const Text("Order"),
-      onPressed: () {
-        controller.BuyProduct();
-        Navigator.pop(context, true);
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: const Text("Thank you for shopping with us!"),
-      content: Container(
-        height: 50,
-        child: Row(
-          children: [
-            const Text("Total Price :"),
-            Text("${controller.Total}Rs"),
-          ],
-        ),
-      ),
-      actions: [
-        cancelButton,
-        continueButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
 //====
 
   @override
@@ -248,93 +205,174 @@ class _MyCartState extends State<MyCart> {
                     ));
               }),
         ),
-        bottomNavigationBar: Container(
-          height: 130,
-          //color: Colors.blue,
-          child: Row(
-            children: [
-              Expanded(
-                  flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Container(
-                      height: 70,
-                      decoration: BoxDecoration(
-                          //color: Colors.cyanAccent,
-                          border: Border.all(color: Colors.orange),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Column(
-                        //mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.all(4.0),
-                            child: Text(
-                              "Total Price",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.orange),
-                            ),
-                          ),
-                          Obx(
-                            () => Text(
-                              "Rs${controller.Total}",
-                              style: const TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )),
-              Expanded(
-                  flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: InkWell(
-                      onTap: () {
-                        showAlertDialog(context);
-
-                        //controller.BuyProduct();
-                      },
-                      child: Container(
-                        height: 70,
-                        decoration: BoxDecoration(
-                            //color: Color.fromARGB(255, 241, 201, 146),
-                            color: Color.fromARGB(255, 82, 79, 55),
-                            border: Border.all(
-                              color: const Color.fromARGB(255, 55, 82, 56),
-                            ),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: const Center(
-                            child: Text(
-                          "Buy Now",
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        )),
-                      ),
-                    ),
-                  )),
-            ],
-          ),
-        ));
+        bottomNavigationBar: Bottumbarforcart());
   }
 
-  Future<void> customeModal(BuildContext context, UserLogindata controller) {
-    return showModalBottomSheet<void>(
-        context: context,
-        builder: (BuildContext context) {
-          return Container(
-              height: 250,
-              color: Color.fromARGB(255, 243, 228, 206),
-              child: Center(
+  Container Bottumbarforcart() {
+    return Container(
+      height: 130,
+      //color: Colors.blue,
+      child: Row(
+        children: [
+          Expanded(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Container(
+                  height: 70,
+                  decoration: BoxDecoration(
+                      //color: Colors.cyanAccent,
+                      border: Border.all(color: Colors.orange),
+                      borderRadius: BorderRadius.circular(10)),
                   child: Column(
+                    //mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(4.0),
+                        child: Text(
+                          "Total Price",
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.orange),
+                        ),
+                      ),
+                      Obx(
+                        () => Text(
+                          "Rs${controller.Total}",
+                          style: const TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )),
+          Expanded(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: InkWell(
+                  onTap: () {
+                    if (controller.Cart.length <= 0) {
+                      Alert_Emptycart();
+                    } else {
+                      Alert_Cart();
+                    }
+
+                    //controller.BuyProduct();
+                  },
+                  child: Container(
+                    height: 70,
+                    decoration: BoxDecoration(
+                        //color: Color.fromARGB(255, 241, 201, 146),
+                        color: Color.fromARGB(255, 82, 79, 55),
+                        border: Border.all(
+                          color: const Color.fromARGB(255, 55, 82, 56),
+                        ),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: const Center(
+                        child: Text(
+                      "Buy Now",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    )),
+                  ),
+                ),
+              )),
+        ],
+      ),
+    );
+  }
+
+  Alert_Emptycart() {
+    Get.defaultDialog(
+      title: "Cart is Empty!",
+      content: SizedBox(
+        height: 100,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text("Oooops! cart is Empty"),
+            const Text("Add item to make order!"),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    elevation: 1,
+                    foregroundColor: const Color.fromARGB(255, 250, 234, 210),
+                    backgroundColor: const Color.fromARGB(255, 250, 234, 210),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10))),
+                onPressed: () => Get.back(),
+                child: const Text(
+                  "Ok",
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.w500),
+                )),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Alert_Cart() {
+    Get.defaultDialog(
+      title: "Cart is Empty",
+      content: SizedBox(
+        height: 150,
+        child: Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Row(
                 children: [
-                  Text('Total Price :${controller.Total}'),
+                  const Text("Total Price :"),
+                  Text("${controller.Total}Rs"),
                 ],
-              )));
-        });
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 1,
+                        foregroundColor:
+                            const Color.fromARGB(255, 250, 234, 210),
+                        backgroundColor:
+                            const Color.fromARGB(255, 250, 234, 210),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                    onPressed: () => Get.back(),
+                    child: const Text(
+                      "Cancle",
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.w500),
+                    )),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 1,
+                        foregroundColor:
+                            const Color.fromARGB(255, 250, 234, 210),
+                        backgroundColor:
+                            const Color.fromARGB(255, 250, 234, 210),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                    onPressed: () {
+                      controller.BuyProduct();
+                      Get.back();
+                    },
+                    child: const Text(
+                      "Order",
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.w500),
+                    )),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

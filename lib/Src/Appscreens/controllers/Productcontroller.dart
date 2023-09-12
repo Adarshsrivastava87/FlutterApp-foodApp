@@ -12,7 +12,7 @@ class UserLogindata extends GetxController {
   var Total = "0".obs;
   var checkoutdata = [].obs;
   var ResposeLists = <Products>[].obs;
-  var _googlsignin = GoogleSignIn();
+  //var _googlsignin = GoogleSignIn();
   var googleAccount = Rx<GoogleSignInAccount?>(null);
 
   login() async {

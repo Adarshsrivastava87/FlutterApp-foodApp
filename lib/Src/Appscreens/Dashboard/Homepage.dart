@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Src/Appscreens/BottumBar/Bottumbar.dart';
 import 'package:my_app/Src/Appscreens/Category/Categorys.dart';
-import 'package:my_app/Src/Appscreens/CustomeDrawer/CustomeDrawer.dart';
-import 'package:my_app/Src/Appscreens/Googlemap/Map.dart';
 import 'package:my_app/Src/Appscreens/RecentOrders/Recentorder.dart';
-import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DashBoard extends StatefulWidget {
@@ -26,7 +23,7 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   Widget build(BuildContext context) {
-    var mycontroller = Get.put(UserLogindata());
+    //var mycontroller = Get.put(UserLogindata());
     return Scaffold(
         // appBar: AppBar(
         //   toolbarHeight: 40,
