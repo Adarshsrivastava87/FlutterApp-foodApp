@@ -5,6 +5,7 @@ import 'package:my_app/Src/Appscreens/Category/Categorys.dart';
 import 'package:my_app/Src/Appscreens/CustomeDrawer/CustomeDrawer.dart';
 import 'package:my_app/Src/Appscreens/LoginScreen/Userloginstate.dart';
 import 'package:my_app/Src/Appscreens/RecentOrders/Recentorder.dart';
+import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({super.key});
@@ -61,9 +62,10 @@ class _DashBoardState extends State<DashBoard> {
                       ],
                     ),
                   ])),
-              MyCategory(
-                Categary: mycontroller.FoodListitems,
-              ),
+              // MyCategory(
+              //   Categary: mycontroller.FoodListitems,
+              // ),
+              MyCategory(),
               const Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Padding(

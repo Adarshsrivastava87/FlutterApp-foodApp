@@ -74,10 +74,10 @@ class OrderDetailView extends StatelessWidget {
                           elevation: 5,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              data.Detail.FoodDetails,
-                              style: TextStyle(fontSize: 20),
-                            ),
+                            // child: Text(
+                            //   data.Detail.FoodDetails,
+                            //   style: TextStyle(fontSize: 20),
+                            // ),
                           ),
                         ),
                       ),

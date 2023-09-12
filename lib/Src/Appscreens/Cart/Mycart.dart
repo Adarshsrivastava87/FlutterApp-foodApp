@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_app/Src/Appscreens/LoginScreen/Userloginstate.dart';
+import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
 
 class MyCart extends StatefulWidget {
   MyCart({super.key});
@@ -10,9 +10,56 @@ class MyCart extends StatefulWidget {
 }
 
 class _MyCartState extends State<MyCart> {
+  var controller = Get.put(UserLogindata());
+  //=====
+
+  showAlertDialog(BuildContext context) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: const Text("Cancel"),
+      onPressed: () {
+        Navigator.pop(context, true);
+      },
+    );
+    Widget continueButton = TextButton(
+      child: const Text("Order"),
+      onPressed: () {
+        controller.BuyProduct();
+        Navigator.pop(context, true);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Text("Thank you for shopping with us!"),
+      content: Container(
+        height: 50,
+        child: Row(
+          children: [
+            const Text("Total Price :"),
+            Text("${controller.Total}Rs"),
+          ],
+        ),
+      ),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+//====
+
   @override
   Widget build(BuildContext context) {
-    var controller = Get.put(UserLogindata());
+    // var controller = Get.put(UserLogindata());
     return Scaffold(
         appBar: AppBar(
           leading: Padding(
@@ -223,7 +270,9 @@ class _MyCartState extends State<MyCart> {
                     padding: const EdgeInsets.all(20.0),
                     child: InkWell(
                       onTap: () {
-                        customeModal(context, controller);
+                        showAlertDialog(context);
+
+                        //controller.BuyProduct();
                       },
                       child: Container(
                         height: 70,
@@ -257,7 +306,12 @@ class _MyCartState extends State<MyCart> {
           return Container(
               height: 250,
               color: Color.fromARGB(255, 243, 228, 206),
-              child: Center(child: Text('Total Price :${controller.Total}')));
+              child: Center(
+                  child: Column(
+                children: [
+                  Text('Total Price :${controller.Total}'),
+                ],
+              )));
         });
   }
 }

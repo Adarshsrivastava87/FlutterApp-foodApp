@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:my_app/Src/Appscreens/Dashboard/Homepage.dart';
 import 'package:my_app/Src/Appscreens/LoginScreen/CustomeButton.dart';
 import 'package:my_app/Src/Appscreens/LoginScreen/InputBox.dart';
+import 'package:my_app/Src/Appscreens/LoginScreen/Signup.dart';
 import 'package:my_app/Src/Appscreens/LoginScreen/Userloginstate.dart';
-import 'package:my_app/States/user_controller.dart';
+import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
 
 class ApploginPage extends StatefulWidget {
   const ApploginPage({super.key});
@@ -56,6 +56,22 @@ class _ApploginPageState extends State<ApploginPage> {
             const SizedBox(
               height: 20,
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(4.0),
+                  child: Text("Don't Have Account ?"),
+                ),
+                InkWell(
+                    onTap: () => Get.to(() => AppSignUpPage()),
+                    child: const Text(
+                      "click me ",
+                      style: TextStyle(color: Colors.orange),
+                    )),
+              ],
+            ),
+
             const customebutton(),
             // Obx(() => Text("${userdataController.Username}")),
             const Text("---------- OR ----------"),
