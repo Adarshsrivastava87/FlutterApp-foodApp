@@ -15,7 +15,7 @@ class _MyrecentOrdersState extends State<MyrecentOrders> {
   var user = Get.put(UserLogindata());
 
   printdata() {
-    print("sssssssss:${user.ResposeLists[0].imgUrl}");
+    print("check:${user.ResposeLists[0].imgUrl}");
   }
 
   @override
@@ -24,6 +24,8 @@ class _MyrecentOrdersState extends State<MyrecentOrders> {
       height: 1000,
       child: Obx(
         () => ListView.builder(
+            shrinkWrap: true,
+            // physics: NeverScrollableScrollPhysics(),
             itemCount: user.ResposeLists.length,
             itemBuilder: (context, index) {
               return Card(

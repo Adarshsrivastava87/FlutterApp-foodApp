@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:my_app/Src/Appscreens/BottumBar/Bottumbar.dart';
 import 'package:my_app/Src/Appscreens/Category/Categorys.dart';
 import 'package:my_app/Src/Appscreens/CustomeDrawer/CustomeDrawer.dart';
-import 'package:my_app/Src/Appscreens/LoginScreen/Userloginstate.dart';
+import 'package:my_app/Src/Appscreens/Googlemap/Map.dart';
 import 'package:my_app/Src/Appscreens/RecentOrders/Recentorder.dart';
 import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({super.key});
@@ -17,8 +18,11 @@ class DashBoard extends StatefulWidget {
 class _DashBoardState extends State<DashBoard> {
   @override
   void initState() {
-    // TODO: implement initState;
     super.initState();
+    // Check for phone call support.
+    canLaunchUrl(Uri(scheme: 'tel', path: '123')).then((bool result) {
+      print("supprted =>$result");
+    });
   }
 
   Widget build(BuildContext context) {
@@ -62,9 +66,6 @@ class _DashBoardState extends State<DashBoard> {
                       ],
                     ),
                   ])),
-              // MyCategory(
-              //   Categary: mycontroller.FoodListitems,
-              // ),
               MyCategory(),
               const Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -78,7 +79,7 @@ class _DashBoardState extends State<DashBoard> {
               ),
               const Expanded(flex: 2, child: MyrecentOrders())
             ]),
-        drawer: MyDrawer(),
+        // drawer: MyDrawer(),
         bottomNavigationBar: const BottumTabBar());
   }
 
@@ -116,11 +117,11 @@ class _DashBoardState extends State<DashBoard> {
                     height: 100,
                     width: 180,
                     //color: Colors.blue,
-                    child: const Column(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.symmetric(vertical: 10),
                           child: Text(
                             "Hippo Shakes",
@@ -130,20 +131,37 @@ class _DashBoardState extends State<DashBoard> {
                         ),
                         Row(
                           children: [
-                            Icon(Icons.location_on_outlined,
-                                color: Colors.amber),
-                            SizedBox(
+                            InkWell(
+                              onTap: () => print("Map"),
+                              child: const Icon(Icons.location_on_outlined,
+                                  color: Colors.amber),
+                            ),
+                            const SizedBox(
                               width: 8,
                             ),
-                            Text(
+                            const Text(
                               "180, Orchard Street",
                             ),
                           ],
                         ),
                         Row(
                           children: [
-                            Icon(Icons.phone, color: Colors.amber),
-                            SizedBox(
+                            InkWell(
+                                onTap: () async {
+                                  Uri launchUri = Uri(
+                                    scheme: 'tel',
+                                    path: "12345",
+                                  );
+
+                                  if (!await launchUrl(launchUri)) {
+                                    print("error");
+                                  } else {
+                                    await launchUrl(launchUri);
+                                    print("calling......");
+                                  }
+                                },
+                                child: Icon(Icons.phone, color: Colors.amber)),
+                            const SizedBox(
                               width: 8,
                             ),
                             Text("(646) 549-0555"),
