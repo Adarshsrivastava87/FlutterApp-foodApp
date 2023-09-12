@@ -85,6 +85,29 @@ class _MyCartState extends State<MyCart> {
             "My cart",
             style: TextStyle(color: Colors.black),
           ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(6.0),
+              child: InkWell(
+                onTap: () {
+                  controller.Cart.clear();
+                  controller.TotalPrice();
+                  Get.back();
+                },
+                child: Container(
+                  height: 20,
+                  width: 80,
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 250, 234, 210),
+                      borderRadius: BorderRadius.circular(100)),
+                  child: const Icon(
+                    Icons.delete,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
         body: Obx(
           () => ListView.builder(
