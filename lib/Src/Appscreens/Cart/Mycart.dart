@@ -318,7 +318,7 @@ class _MyCartState extends State<MyCart> {
 
   Alert_Cart() {
     Get.defaultDialog(
-      title: "Cart is Empty",
+      title: "Thankyou for order!",
       content: SizedBox(
         height: 150,
         child: Column(
