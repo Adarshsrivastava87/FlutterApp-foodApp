@@ -9,11 +9,11 @@ class productController extends GetxController {
   var Total = "0".obs;
   var checkoutdata = [].obs;
   var ResposeLists = <Products>[].obs;
-
+  var Cart = [].obs;
   fetchdata() async {
     //print("fetching");
     var url =
-        'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Producst.json';
+        'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Product.json';
     var res = await http.get(Uri.parse(url));
     if (res.statusCode == 200) {
       var stringdata = res.body;
@@ -23,7 +23,6 @@ class productController extends GetxController {
 
   checkdata() {}
 
-  var Cart = [].obs;
   addItems(item) {
     //print("check");
     var data = FoodListCart(
@@ -38,7 +37,10 @@ class productController extends GetxController {
 
   incAndDecQuantity(v, index) {
     if (v == "Increment") {
-      Cart[index].quantity++;
+      if (Cart[index].quantity < ResposeLists[index].quantity) {
+        print("=======>${ResposeLists[index].quantity}");
+        Cart[index].quantity++;
+      }
     } else if (Cart[index].quantity > 1) {
       Cart[index].quantity--;
     } else {

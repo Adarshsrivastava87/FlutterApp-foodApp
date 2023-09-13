@@ -70,10 +70,6 @@ class _MyrecentOrdersState extends State<MyrecentOrders> {
                             onTap: () {
                               user.addItems(user.ResposeLists[index]);
                             },
-                            // child: Icon(Icons.thumb_up_alt,
-                            //     color: Liked && Likedindex == index
-                            //         ? Colors.blue
-                            //         : Colors.black)
                             child: const Padding(
                               padding: EdgeInsets.symmetric(vertical: 10),
                               child: Text(
