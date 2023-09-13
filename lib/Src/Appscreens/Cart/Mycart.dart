@@ -71,36 +71,27 @@ class _MyCartState extends State<MyCart> {
                     ))
             ],
           ),
-          body: Obx(
-            () {
-              //productlist();
-              return (controller.Cart.isNotEmpty
-                  ? productlist()
-                  : Center(
-                      child: Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              "Cart is Empty!",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500, fontSize: 18),
-                            ),
-                            Image.network(
-                                "https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-2130356-1800917.png"),
-                          ],
+          body: (controller.Cart.isNotEmpty
+              ? productlist()
+              : Center(
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Cart is Empty!",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 18),
                         ),
-                      ),
-                    ));
-            },
-          ),
-          bottomNavigationBar: Obx(
-            () {
-              return (controller.Cart.isNotEmpty
-                  ? Bottumbarforcart()
-                  : const Text(""));
-            },
-          )),
+                        Image.network(
+                            "https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-2130356-1800917.png"),
+                      ],
+                    ),
+                  ),
+                )),
+          bottomNavigationBar: (controller.Cart.isNotEmpty
+              ? Bottumbarforcart()
+              : const Text(""))),
     );
   }
 
