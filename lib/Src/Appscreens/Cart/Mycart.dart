@@ -11,201 +11,233 @@ class MyCart extends StatefulWidget {
 
 class _MyCartState extends State<MyCart> {
   var controller = Get.put(productController());
-  //=====
-//====
 
   @override
   Widget build(BuildContext context) {
     // var controller = Get.put(productController());
-    return Scaffold(
-        appBar: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.all(6.0),
-            child: InkWell(
-              onTap: () => Get.back(),
-              child: Container(
-                height: 10,
-                width: 10,
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 250, 234, 210),
-                    borderRadius: BorderRadius.circular(100)),
-                child: const Icon(
-                  Icons.turn_slight_left_sharp,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
-          backgroundColor: Color.fromARGB(255, 250, 249, 249),
-          elevation: 0,
-          title: const Text(
-            "My cart",
-            style: TextStyle(color: Colors.black),
-          ),
-          actions: [
-            Padding(
+    return Obx(
+      () => Scaffold(
+          appBar: AppBar(
+            leading: Padding(
               padding: const EdgeInsets.all(6.0),
               child: InkWell(
-                onTap: () {
-                  controller.Cart.clear();
-                  controller.totalPrice();
-                  Get.back();
-                },
+                onTap: () => Get.back(),
                 child: Container(
-                  height: 20,
-                  width: 80,
+                  height: 10,
+                  width: 10,
                   decoration: BoxDecoration(
                       color: Color.fromARGB(255, 250, 234, 210),
                       borderRadius: BorderRadius.circular(100)),
                   child: const Icon(
-                    Icons.delete,
+                    Icons.turn_slight_left_sharp,
                     color: Colors.black,
                   ),
                 ),
               ),
             ),
-          ],
-        ),
-        body: Obx(
-          () => ListView.builder(
-              itemCount: controller.Cart.length,
-              itemBuilder: (context, index) {
-                return Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 25, vertical: 10),
-                    height: 120,
-                    width: Get.width,
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 250, 234, 210),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Row(
-                      children: [
-                        Expanded(
-                            flex: 3,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15)),
-                                height: 100,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Image.network(
-                                    controller.Cart[index].imgUrl,
-                                  ),
-                                ),
-                              ),
-                            )),
-                        Expanded(
-                            flex: 4,
-                            child: Container(
-                              //color: const Color.fromARGB(255, 191, 101, 68),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 5),
-                                    child: Text(
-                                      "${controller.Cart[index].name}",
-                                      style: const TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 5),
-                                    child: Text(
-                                      "Rs${controller.Cart[index].Price}",
-                                      style: const TextStyle(
-                                          color: Colors.orange,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: InkWell(
-                                            onTap: () {
-                                              controller.incAndDecQuantity(
-                                                  "Decrement", index);
-                                              setState(() {});
-                                            },
-                                            child: Container(
-                                                height: 25,
-                                                width: 25,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5)),
-                                                child: const Icon(
-                                                  Icons.remove,
-                                                  size: 18,
-                                                ))),
-                                      ),
-                                      Text(
-                                        "${controller.Cart[index].quantity}",
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: InkWell(
-                                            onTap: () {
-                                              controller.incAndDecQuantity(
-                                                  "Increment", index);
-                                              setState(() {});
-                                            },
-                                            child: Container(
-                                                height: 25,
-                                                width: 25,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5)),
-                                                child: const Icon(
-                                                  Icons.add,
-                                                  size: 18,
-                                                ))),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            )),
-                        Expanded(
-                            flex: 1,
-                            child: InkWell(
-                              onTap: () {
-                                controller.removedata(index);
-                              },
-                              child: Container(
-                                height: 50,
-                                width: 10,
-                                decoration: const BoxDecoration(
-                                    // color: Colors.white,
-                                    color: Color.fromARGB(255, 250, 247, 244),
-                                    borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(15),
-                                        topLeft: Radius.circular(15))),
-                                child: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                  child: Icon(Icons.delete),
-                                ),
-                              ),
-                            ))
-                      ],
+            backgroundColor: Color.fromARGB(255, 250, 249, 249),
+            elevation: 0,
+            title: const Text(
+              "My cart",
+              style: TextStyle(color: Colors.black),
+            ),
+            actions: [
+              (controller.Cart.isEmpty
+                  ? Text("")
+                  : Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: InkWell(
+                        onTap: () {
+                          if (controller.Cart.isEmpty) {
+                            return;
+                          } else {
+                            controller.Cart.clear();
+                            controller.totalPrice();
+                            Get.back();
+                          }
+                        },
+                        child: Container(
+                          height: 20,
+                          width: 80,
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 250, 234, 210),
+                              borderRadius: BorderRadius.circular(100)),
+                          child: const Icon(
+                            Icons.delete,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ))
+            ],
+          ),
+          body: Obx(
+            () {
+              //productlist();
+              return (controller.Cart.isNotEmpty
+                  ? productlist()
+                  : Center(
+                      child: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Cart is Empty!",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500, fontSize: 18),
+                            ),
+                            Image.network(
+                                "https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-2130356-1800917.png"),
+                          ],
+                        ),
+                      ),
                     ));
-              }),
-        ),
-        bottomNavigationBar: Bottumbarforcart());
+            },
+          ),
+          bottomNavigationBar: Obx(
+            () {
+              return (controller.Cart.isNotEmpty
+                  ? Bottumbarforcart()
+                  : const Text(""));
+            },
+          )),
+    );
+  }
+
+  ListView productlist() {
+    return ListView.builder(
+        itemCount: controller.Cart.length,
+        itemBuilder: (context, index) {
+          return Container(
+              margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+              height: 120,
+              width: Get.width,
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 250, 234, 210),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15)),
+                          height: 100,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.network(
+                              controller.Cart[index].imgUrl,
+                            ),
+                          ),
+                        ),
+                      )),
+                  Expanded(
+                      flex: 4,
+                      child: Container(
+                        //color: const Color.fromARGB(255, 191, 101, 68),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              child: Text(
+                                "${controller.Cart[index].name}",
+                                style: const TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              child: Text(
+                                "Rs${controller.Cart[index].Price}",
+                                style: const TextStyle(
+                                    color: Colors.orange,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: InkWell(
+                                      onTap: () {
+                                        controller.incAndDecQuantity(
+                                            "Decrement", index);
+                                        setState(() {});
+                                      },
+                                      child: Container(
+                                          height: 25,
+                                          width: 25,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: const Icon(
+                                            Icons.remove,
+                                            size: 18,
+                                          ))),
+                                ),
+                                Text(
+                                  "${controller.Cart[index].quantity}",
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: InkWell(
+                                      onTap: () {
+                                        controller.incAndDecQuantity(
+                                            "Increment", index);
+                                        setState(() {});
+                                      },
+                                      child: Container(
+                                          height: 25,
+                                          width: 25,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: const Icon(
+                                            Icons.add,
+                                            size: 18,
+                                          ))),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      )),
+                  Expanded(
+                      flex: 1,
+                      child: InkWell(
+                        onTap: () {
+                          controller.removedata(index);
+                        },
+                        child: Container(
+                          height: 50,
+                          width: 10,
+                          decoration: const BoxDecoration(
+                              // color: Colors.white,
+                              color: Color.fromARGB(255, 250, 247, 244),
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(15),
+                                  topLeft: Radius.circular(15))),
+                          child: const Padding(
+                            padding: EdgeInsets.only(left: 15),
+                            child: Icon(Icons.delete),
+                          ),
+                        ),
+                      ))
+                ],
+              ));
+        });
   }
 
   Container Bottumbarforcart() {
@@ -237,12 +269,10 @@ class _MyCartState extends State<MyCart> {
                               color: Colors.orange),
                         ),
                       ),
-                      Obx(
-                        () => Text(
-                          "Rs${controller.Total}",
-                          style: const TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold),
-                        ),
+                      Text(
+                        "Rs${controller.Total}",
+                        style: const TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),

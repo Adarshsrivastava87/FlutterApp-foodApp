@@ -31,7 +31,7 @@ class productController extends GetxController {
         Id: item.id,
         Price: item.price,
         name: item.name,
-        quantity: item.quantity);
+        quantity: 1);
     Cart.add(data);
     //print(Cart);
   }
@@ -39,7 +39,7 @@ class productController extends GetxController {
   incAndDecQuantity(v, index) {
     if (v == "Increment") {
       Cart[index].quantity++;
-    } else if (Cart[index].quantity >= 2) {
+    } else if (Cart[index].quantity > 1) {
       Cart[index].quantity--;
     } else {
       return;
