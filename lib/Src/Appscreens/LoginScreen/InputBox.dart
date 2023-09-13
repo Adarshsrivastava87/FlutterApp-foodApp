@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Src/Appscreens/controllers/Logincontroller.dart';
-import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
 
 class InputBox extends StatelessWidget {
   final String inputText;
