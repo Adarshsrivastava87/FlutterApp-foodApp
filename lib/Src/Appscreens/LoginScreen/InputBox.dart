@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_app/Src/Appscreens/controllers/Logincontroller.dart';
 import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
 
 class InputBox extends StatelessWidget {
@@ -10,7 +11,8 @@ class InputBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var Controller = Get.put(UserLogindata());
+    var userLoginController = Get.put(Logincontroller());
+
     return TextField(
       obscureText: secureText,
       decoration: InputDecoration(
@@ -21,8 +23,8 @@ class InputBox extends StatelessWidget {
               ? Icon(Icons.password)
               : Icon(Icons.card_giftcard_rounded)),
       onChanged: (v) => secureText
-          ? Controller.setUserpassword(v)
-          : Controller.setUsername(v),
+          ? userLoginController.setUserpassword(v)
+          : userLoginController.setUsername(v),
     );
   }
 }

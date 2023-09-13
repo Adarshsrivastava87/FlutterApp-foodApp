@@ -10,13 +10,13 @@ class MyCart extends StatefulWidget {
 }
 
 class _MyCartState extends State<MyCart> {
-  var controller = Get.put(UserLogindata());
+  var controller = Get.put(productController());
   //=====
 //====
 
   @override
   Widget build(BuildContext context) {
-    // var controller = Get.put(UserLogindata());
+    // var controller = Get.put(productController());
     return Scaffold(
         appBar: AppBar(
           leading: Padding(
@@ -48,7 +48,7 @@ class _MyCartState extends State<MyCart> {
               child: InkWell(
                 onTap: () {
                   controller.Cart.clear();
-                  controller.TotalPrice();
+                  controller.totalPrice();
                   Get.back();
                 },
                 child: Container(
@@ -132,7 +132,7 @@ class _MyCartState extends State<MyCart> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: InkWell(
                                             onTap: () {
-                                              controller.IncAndDecQuantity(
+                                              controller.incAndDecQuantity(
                                                   "Decrement", index);
                                               setState(() {});
                                             },
@@ -158,7 +158,7 @@ class _MyCartState extends State<MyCart> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: InkWell(
                                             onTap: () {
-                                              controller.IncAndDecQuantity(
+                                              controller.incAndDecQuantity(
                                                   "Increment", index);
                                               setState(() {});
                                             },
@@ -184,7 +184,7 @@ class _MyCartState extends State<MyCart> {
                             flex: 1,
                             child: InkWell(
                               onTap: () {
-                                controller.Removedata(index);
+                                controller.removedata(index);
                               },
                               child: Container(
                                 height: 50,
@@ -360,7 +360,7 @@ class _MyCartState extends State<MyCart> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
                     onPressed: () {
-                      controller.BuyProduct();
+                      controller.buyProduct();
                       Get.back();
                     },
                     child: const Text(

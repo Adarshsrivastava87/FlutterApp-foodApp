@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Src/Appscreens/Dashboard/Homepage.dart';
+import 'package:my_app/Src/Appscreens/controllers/Logincontroller.dart';
 import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
 import 'package:my_app/Src/Appscreens/controllers/Signupcontroller.dart';
 
@@ -14,8 +15,9 @@ class customebutton extends StatefulWidget {
 }
 
 class _customebuttonState extends State<customebutton> {
-  var userdataController = Get.put(UserLogindata());
+  //var userdataController = Get.put(productController());
   var SignupController = Get.put(Signup());
+  var userLoginController = Get.put(Logincontroller());
   bool change = false;
 //cusstome Alertbox
   showAlertDialog(BuildContext context) {
@@ -101,8 +103,8 @@ class _customebuttonState extends State<customebutton> {
   }
 
   validationForlogin() {
-    if (userdataController.Username == "" ||
-        userdataController.Userpassword == "") {
+    if (userLoginController.username == "" ||
+        userLoginController.userpassword == "") {
       showAlertDialog(context);
     } else {
       widget.callback();

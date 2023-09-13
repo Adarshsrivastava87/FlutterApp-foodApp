@@ -4,6 +4,7 @@ import 'package:my_app/Src/Appscreens/Dashboard/Homepage.dart';
 import 'package:my_app/Src/Appscreens/LoginScreen/CustomeButton.dart';
 import 'package:my_app/Src/Appscreens/LoginScreen/InputBox.dart';
 import 'package:my_app/Src/Appscreens/LoginScreen/Signup.dart';
+import 'package:my_app/Src/Appscreens/controllers/Logincontroller.dart';
 import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
 
 class ApploginPage extends StatefulWidget {
@@ -14,7 +15,8 @@ class ApploginPage extends StatefulWidget {
 }
 
 class _ApploginPageState extends State<ApploginPage> {
-  var userdataController = Get.put(UserLogindata());
+  //var userdataController = Get.put(productController());
+  var userLoginController = Get.put(Logincontroller());
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +75,7 @@ class _ApploginPageState extends State<ApploginPage> {
 
             customebutton(
               Button_name: "Login",
-              callback: () => userdataController.login(),
+              callback: () => userLoginController.login(),
             ),
             // Obx(() => Text("${userdataController.Username}")),
             const Text("---------- OR ----------"),
@@ -85,11 +87,11 @@ class _ApploginPageState extends State<ApploginPage> {
                   Icon(Icons.facebook),
                   InkWell(
                       onTap: () async {
-                        await userdataController.login();
-                        if (userdataController.googleAccount.value == null) {
+                        await userLoginController.login();
+                        if (userLoginController.googleAccount.value == null) {
                           Get.to(() => ApploginPage());
                         } else {
-                          print("${userdataController.googleAccount.value}");
+                          print("${userLoginController.googleAccount.value}");
                           Get.to(() => DashBoard());
                         }
                       },

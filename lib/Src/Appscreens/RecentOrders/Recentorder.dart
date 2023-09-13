@@ -11,7 +11,7 @@ class MyrecentOrders extends StatefulWidget {
 }
 
 class _MyrecentOrdersState extends State<MyrecentOrders> {
-  var user = Get.put(UserLogindata());
+  var user = Get.put(productController());
 
   printdata() {
     print("check:${user.ResposeLists[0].imgUrl}");

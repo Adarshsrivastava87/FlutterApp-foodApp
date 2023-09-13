@@ -10,7 +10,7 @@ class BottumTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.put(UserLogindata());
+    var controller = Get.put(productController());
     return Container(
       height: 80,
       //color: Colors.orange,
@@ -45,7 +45,7 @@ class BottumTabBar extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              controller.TotalPrice();
+              controller.totalPrice();
               Get.to(() => MyCart());
             },
             child: SizedBox(

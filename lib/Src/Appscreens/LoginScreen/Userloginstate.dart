@@ -7,7 +7,7 @@
 // import 'package:http/http.dart' as http;
 // import 'package:my_app/Src/Appscreens/Modals/product.dart';
 
-// class UserLogindata extends GetxController {
+// class productController extends GetxController {
 //   var Username = "".obs;
 //   var Userpassword = "".obs;
 //   var Total = "0".obs;

@@ -1,45 +1,17 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:my_app/Modal/modal.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/Src/Appscreens/Modals/product.dart';
 
-class UserLogindata extends GetxController {
-  var Username = "".obs;
-  var Userpassword = "".obs;
+class productController extends GetxController {
   var Total = "0".obs;
   var checkoutdata = [].obs;
   var ResposeLists = <Products>[].obs;
-  //var _googlsignin = GoogleSignIn();
-  var googleAccount = Rx<GoogleSignInAccount?>(null);
 
-  login() async {
-    //googleAccount.value = await _googlsignin.signIn();
-    List<Map> data = [];
-    Map user = {
-      "displayName": googleAccount.value?.displayName,
-      "email": googleAccount.value?.email,
-      "id": googleAccount.value?.id,
-      "photoUrl": googleAccount.value?.photoUrl
-    };
-    data.add(user);
-
-    print("Login function called ${googleAccount.value?.displayName}");
-    var url =
-        'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/User.json';
-    http.post(
-      Uri.parse(url),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(data),
-    );
-  }
-
-  Fetchdata() async {
-    print("fetching");
+  fetchdata() async {
+    //print("fetching");
     var url =
         'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Producst.json';
     var res = await http.get(Uri.parse(url));
@@ -53,7 +25,7 @@ class UserLogindata extends GetxController {
 
   var Cart = [].obs;
   addItems(item) {
-    print("check");
+    //print("check");
     var data = FoodListCart(
         imgUrl: item.imgUrl,
         Id: item.id,
@@ -61,10 +33,10 @@ class UserLogindata extends GetxController {
         name: item.name,
         quantity: item.quantity);
     Cart.add(data);
-    print(Cart);
+    //print(Cart);
   }
 
-  IncAndDecQuantity(v, index) {
+  incAndDecQuantity(v, index) {
     if (v == "Increment") {
       Cart[index].quantity++;
     } else if (Cart[index].quantity >= 2) {
@@ -72,10 +44,10 @@ class UserLogindata extends GetxController {
     } else {
       return;
     }
-    TotalPrice();
+    totalPrice();
   }
 
-  TotalPrice() {
+  totalPrice() {
     print("Total price");
     num sum = 0;
     // for loop runs from 0 to cart length - 1
@@ -87,23 +59,13 @@ class UserLogindata extends GetxController {
     update();
   }
 
-  Removedata(index) {
-    print(index);
+  removedata(index) {
+    //print(index);
     Cart.removeAt(index);
-    TotalPrice();
+    totalPrice();
   }
 
-  setUserpassword(data) {
-    print("password:$data");
-    Userpassword.value = data;
-  }
-
-  setUsername(data) {
-    print("username:$data");
-    Username.value = data;
-  }
-
-  BuyProduct() {
+  buyProduct() {
     var details = new Map();
     if (Cart.isNotEmpty) {
       details["TotalPrice"] = Total.value;
@@ -133,7 +95,7 @@ class UserLogindata extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
-    Fetchdata();
+    fetchdata();
     super.onInit();
   }
 }

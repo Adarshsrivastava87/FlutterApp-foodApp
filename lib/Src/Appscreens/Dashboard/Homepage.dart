@@ -23,7 +23,7 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   Widget build(BuildContext context) {
-    //var mycontroller = Get.put(UserLogindata());
+    //var mycontroller = Get.put(productController());
     return Scaffold(
         // appBar: AppBar(
         //   toolbarHeight: 40,
