@@ -63,23 +63,10 @@ class _customebuttonState extends State<customebutton> {
         await Future.delayed(const Duration(seconds: 2));
         if (widget.Button_name == "Signup") {
           /// Validation for Signup
-          if (SignupController.newusername.value == "" ||
-              SignupController.newuserpassword.value == "") {
-            showAlertDialog(context);
-          } else {
-            widget.callback();
-            Get.off(() => const DashBoard());
-          }
+          validationForsignup();
         } else {
           /// validation for Login
-
-          if (userdataController.Username == "" ||
-              userdataController.Userpassword == "") {
-            showAlertDialog(context);
-          } else {
-            widget.callback();
-            Get.off(() => const DashBoard());
-          }
+          validationForlogin();
         }
       },
       child: AnimatedContainer(
@@ -101,5 +88,25 @@ class _customebuttonState extends State<customebutton> {
               ),
       ),
     );
+  }
+
+  validationForsignup() {
+    if (SignupController.newusername == "" ||
+        SignupController.newuserpassword == "") {
+      showAlertDialog(context);
+    } else {
+      widget.callback();
+      Get.off(() => const DashBoard());
+    }
+  }
+
+  validationForlogin() {
+    if (userdataController.Username == "" ||
+        userdataController.Userpassword == "") {
+      showAlertDialog(context);
+    } else {
+      widget.callback();
+      Get.off(() => const DashBoard());
+    }
   }
 }
