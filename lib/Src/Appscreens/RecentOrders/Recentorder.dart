@@ -66,18 +66,25 @@ class _MyrecentOrdersState extends State<MyrecentOrders> {
                             "Shake with..",
                             style: TextStyle(fontSize: 14),
                           ),
-                          InkWell(
-                            onTap: () {
-                              user.addItems(user.ResposeLists[index]);
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 10),
-                              child: Text(
-                                "Add To Cart+",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          )
+                          (user.ResposeLists[index].quantity == 0
+                              ? const Text(
+                                  "Out of stock!",
+                                  style: TextStyle(
+                                      color: Colors.red, fontSize: 18),
+                                )
+                              : InkWell(
+                                  onTap: () {
+                                    user.addItems(user.ResposeLists[index]);
+                                  },
+                                  child: const Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 10),
+                                    child: Text(
+                                      "Add To Cart+",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ))
                         ],
                       ),
                     ),

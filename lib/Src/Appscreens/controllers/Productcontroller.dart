@@ -1,5 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Modal/modal.dart';
 import 'package:http/http.dart' as http;
@@ -25,25 +28,62 @@ class productController extends GetxController {
 
   addItems(item) {
     //print("check");
-    var data = FoodListCart(
-        imgUrl: item.imgUrl,
-        Id: item.id,
-        Price: item.price,
-        name: item.name,
-        quantity: 1);
-    Cart.add(data);
+    if (Cart.isEmpty) {
+      /// Add item if cart is Empty
+      var data = FoodListCart(
+          imgUrl: item.imgUrl,
+          Id: item.id,
+          Price: item.price,
+          name: item.name,
+          quantity: 1);
+      Cart.add(data);
+    } else {
+      bool check = true;
+      Cart.forEach((element) {
+        check = element.Id == item.id;
+      });
+      if (check) {
+        //print("Exsist");
+        Timer(const Duration(seconds: 1), () {
+          Get.back();
+        });
+        Get.defaultDialog(
+            title: "Item Add",
+            content: const Text(
+              "Item Already Added To Cart",
+              style: TextStyle(color: Colors.green),
+            ));
+      } else {
+        var data = FoodListCart(
+            imgUrl: item.imgUrl,
+            Id: item.id,
+            Price: item.price,
+            name: item.name,
+            quantity: 1);
+        Cart.add(data);
+      }
+    }
+
     //print(Cart);
   }
 
-  incAndDecQuantity(v, index) {
+  incAndDecQuantity(v, index) async {
     if (v == "Increment") {
-      if (Cart[index].quantity < ResposeLists[index].quantity) {
-        print("=======>${ResposeLists[index].quantity}");
+      print(index);
+      int id = Cart[index].Id;
+      if (Cart[index].quantity < ResposeLists[id].quantity) {
+        print("=======>${ResposeLists[id].quantity}");
         Cart[index].quantity++;
+        var item = Cart[index];
+        updateData(item, ResposeLists[id].quantity, Cart[index].Id);
       }
     } else if (Cart[index].quantity > 1) {
       Cart[index].quantity--;
+      var item = Cart[index];
+      int id = Cart[index].Id;
+      updateData(item, ResposeLists[id].quantity, Cart[index].Id);
     } else {
+      print("index");
       return;
     }
     totalPrice();
@@ -88,8 +128,31 @@ class productController extends GetxController {
     }
   }
 
+  updateData(
+    data,
+    old_q,
+    index,
+  ) async {
+    print("==========>$old_q,${data.quantity}");
+
+    int qty = old_q - data.quantity;
+    //await fetchdata();
+    await http.patch(
+      Uri.parse(
+          'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Product/$index.json'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        "quantity": qty,
+      }),
+    );
+    //fetchdata();
+  }
+
   clearCart() {
     //print("clear cart");
+    fetchdata();
     Cart.clear();
     Total.value = "0";
   }
