@@ -74,14 +74,9 @@ class productController extends GetxController {
       if (Cart[index].quantity < ResposeLists[id].quantity) {
         print("=======>${ResposeLists[id].quantity}");
         Cart[index].quantity++;
-        var item = Cart[index];
-        updateData(item, ResposeLists[id].quantity, Cart[index].Id);
       }
     } else if (Cart[index].quantity > 1) {
       Cart[index].quantity--;
-      var item = Cart[index];
-      int id = Cart[index].Id;
-      updateData(item, ResposeLists[id].quantity, Cart[index].Id);
     } else {
       print("index");
       return;
@@ -128,33 +123,31 @@ class productController extends GetxController {
     }
   }
 
-  updateData(
-    data,
-    old_q,
-    index,
-  ) async {
-    print("==========>$old_q,${data.quantity}");
-
-    int qty = old_q - data.quantity;
-    //await fetchdata();
-    await http.patch(
-      Uri.parse(
-          'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Product/$index.json'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, dynamic>{
-        "quantity": qty,
-      }),
-    );
-    //fetchdata();
-  }
-
   clearCart() {
     //print("clear cart");
+    updateData();
     fetchdata();
     Cart.clear();
     Total.value = "0";
+  }
+
+  updateData() async {
+    //await fetchdata();
+
+    Cart.forEach((element) async {
+      await http.patch(
+        Uri.parse(
+            'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Product/${element.Id}.json'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
+          "quantity": ResposeLists[element.Id].quantity - element.quantity,
+        }),
+      );
+    });
+
+    //fetchdata();
   }
 
   @override

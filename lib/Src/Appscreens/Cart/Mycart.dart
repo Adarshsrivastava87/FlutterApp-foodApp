@@ -21,7 +21,10 @@ class _MyCartState extends State<MyCart> {
             leading: Padding(
               padding: const EdgeInsets.all(6.0),
               child: InkWell(
-                onTap: () => Get.back(),
+                onTap: () {
+                  controller.fetchdata();
+                  Get.back();
+                },
                 child: Container(
                   height: 10,
                   width: 10,
@@ -153,65 +156,54 @@ class _MyCartState extends State<MyCart> {
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
-                            (controller.Cart[index].quantity == 0
-                                ? const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text(
-                                      "Out of Stock!",
-                                      style: TextStyle(
-                                          color: Colors.red, fontSize: 18),
-                                    ),
-                                  )
-                                : Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: InkWell(
-                                            onTap: () {
-                                              controller.incAndDecQuantity(
-                                                  "Decrement", index);
-                                              setState(() {});
-                                            },
-                                            child: Container(
-                                                height: 25,
-                                                width: 25,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5)),
-                                                child: const Icon(
-                                                  Icons.remove,
-                                                  size: 18,
-                                                ))),
-                                      ),
-                                      Text(
-                                        "${controller.Cart[index].quantity}",
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: InkWell(
-                                            onTap: () {
-                                              controller.incAndDecQuantity(
-                                                  "Increment", index);
-                                            },
-                                            child: Container(
-                                                height: 25,
-                                                width: 25,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5)),
-                                                child: const Icon(
-                                                  Icons.add,
-                                                  size: 18,
-                                                ))),
-                                      ),
-                                    ],
-                                  ))
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: InkWell(
+                                      onTap: () {
+                                        controller.incAndDecQuantity(
+                                            "Decrement", index);
+                                        setState(() {});
+                                      },
+                                      child: Container(
+                                          height: 25,
+                                          width: 25,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: const Icon(
+                                            Icons.remove,
+                                            size: 18,
+                                          ))),
+                                ),
+                                Text(
+                                  "${controller.Cart[index].quantity}",
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: InkWell(
+                                      onTap: () {
+                                        controller.incAndDecQuantity(
+                                            "Increment", index);
+                                      },
+                                      child: Container(
+                                          height: 25,
+                                          width: 25,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: const Icon(
+                                            Icons.add,
+                                            size: 18,
+                                          ))),
+                                ),
+                              ],
+                            )
                           ],
                         ),
                       )),
@@ -285,9 +277,8 @@ class _MyCartState extends State<MyCart> {
                 padding: const EdgeInsets.all(20.0),
                 child: InkWell(
                   onTap: () {
-                    if (controller.Cart.length <= 0) {
-                      Alert_Emptycart();
-                    } else {
+                    controller.fetchdata();
+                    if (controller.Cart.length > 0) {
                       Alert_Cart();
                     }
 
