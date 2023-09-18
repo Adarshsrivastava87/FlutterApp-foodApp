@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 import 'package:my_app/Src/Appscreens/BottumBar/Bottumbar.dart';
 import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
 import 'package:my_app/Src/Appscreens/controllers/categoryController.dart';
