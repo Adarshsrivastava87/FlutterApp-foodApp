@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Src/Appscreens/Details/detailpage.dart';
 import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
+import 'package:my_app/Src/Appscreens/controllers/categoryController.dart';
 
 // ignore: must_be_immutable
 class MyCategory extends StatelessWidget {
   MyCategory({super.key});
 
   var controller = Get.put(productController());
+  var Categ_controller = Get.put(categoryController());
   @override
   Widget build(BuildContext context) {
     // ignore: non_constant_identifier_names
     MoveTo(details) {
+      Categ_controller.fetchCategoryData();
       Get.to(() => OrderDetailView(), arguments: details);
     }
 

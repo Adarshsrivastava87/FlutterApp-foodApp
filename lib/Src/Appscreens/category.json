@@ -1,0 +1,79 @@
+[
+    {
+        "imgUrl": "https://cdn.britannica.com/50/80550-050-5D392AC7/Scoops-kinds-ice-cream.jpg",
+        "Id": 1,
+        "quantity": 15,
+        "Price": 400,
+        "name": "IceCream"
+    },
+    {
+        "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx-LTLJo-WGpjmehS_p5ZzRb-FOOW9D6V7sg&usqp=CAU",
+        "Id": 2,
+        "quantity": 20,
+        "Price": 50,
+        "name": "IceCream"
+    },
+    {
+        "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ414U6Ak7pE00Fq01RwnZ_-xFgPXvEE4Gdf5Kyi4JKWA&s",
+        "Id": 3,
+        "quantity": 10,
+        "Price": 500,
+        "name": "Fruit"
+    },
+    {
+        "imgUrl": "https://www.allrecipes.com/thmb/5JVfA7MxfTUPfRerQMdF-nGKsLY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/25473-the-perfect-basic-burger-DDMFS-4x3-56eaba3833fd4a26a82755bcd0be0c54.jpg",
+        "Id": 4,
+        "quantity": 9,
+        "Price": 200,
+        "name": "Burger"
+    },
+    {
+        "imgUrl": "https://images.herzindagi.info/image/2022/May/cold-drink-hacks-to-know.jpg",
+        "Id": 5,
+        "quantity": 15,
+        "Price": 100,
+        "name": "ColdDrink"
+    },
+    {
+        "imgUrl": "https://uploads-ssl.webflow.com/5e9ebc3fff165933f19fbdbe/61b31c9d289e22335b6753b2_Ice%20Cream%202.jpg",
+        "Id": 6,
+        "quantity": 10,
+        "Price": 100,
+        "name": "Blue Cold"
+    },
+    {
+        "imgUrl": "https://www.biggerbolderbaking.com/wp-content/uploads/2020/01/2-Ingredient-Ice-cream-Thumbnail-scaled.jpg",
+        "Id": 7,
+        "quantity": 15,
+        "Price": 400,
+        "name": "IceCream"
+    },
+    {
+        "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx-LTLJo-WGpjmehS_p5ZzRb-FOOW9D6V7sg&usqp=CAU",
+        "Id": 8,
+        "quantity": 20,
+        "Price": 50,
+        "name": "IceCream"
+    },
+    {
+        "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ414U6Ak7pE00Fq01RwnZ_-xFgPXvEE4Gdf5Kyi4JKWA&s",
+        "Id": 9,
+        "quantity": 10,
+        "Price": 500,
+        "name": "Fruit"
+    },
+    {
+        "imgUrl": "https://www.allrecipes.com/thmb/5JVfA7MxfTUPfRerQMdF-nGKsLY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/25473-the-perfect-basic-burger-DDMFS-4x3-56eaba3833fd4a26a82755bcd0be0c54.jpg",
+        "Id": 10,
+        "quantity": 9,
+        "Price": 200,
+        "name": "Burger"
+    },
+    {
+        "imgUrl": "https://images.herzindagi.info/image/2022/May/cold-drink-hacks-to-know.jpg",
+        "Id": 11,
+        "quantity": 15,
+        "Price": 100,
+        "name": "ColdDrink"
+    }
+]

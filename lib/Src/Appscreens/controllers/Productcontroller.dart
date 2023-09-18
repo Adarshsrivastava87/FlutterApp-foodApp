@@ -27,7 +27,7 @@ class productController extends GetxController {
   checkdata() {}
 
   addItems(item) {
-    //print("check");
+    print("check added item ${item.quantity}");
     if (Cart.isEmpty) {
       /// Add item if cart is Empty
       var data = FoodListCart(
