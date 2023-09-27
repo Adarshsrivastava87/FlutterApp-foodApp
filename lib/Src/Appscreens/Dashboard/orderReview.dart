@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class ReviewOrder extends StatelessWidget {
@@ -6,80 +7,137 @@ class ReviewOrder extends StatelessWidget {
   ReviewOrder({super.key, required this.Dispalydata});
   @override
   Widget build(BuildContext context) {
+    print("=>width${Get.width}");
+    print("=>Hieght${Get.height}");
     print("${Dispalydata}");
     return Scaffold(
-      appBar: AppBar(title: Text("Order Details")),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              Dispalydata.name,
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-              ),
+        appBar: AppBar(title: const Text("Order Details")),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Wrap(
+              spacing: 12,
+              runSpacing: 10,
+              children: [
+                Container(
+                    height: 200,
+                    width: 200,
+                    decoration: const BoxDecoration(
+                        color: Colors.amber,
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: const Center(child: Text("data"))),
+                Container(
+                    height: 200,
+                    width: 100,
+                    color: const Color.fromARGB(255, 200, 180, 125),
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: const Color.fromARGB(255, 227, 207, 148),
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("data")),
+                Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.amber,
+                    child: const Text("20")),
+              ],
             ),
           ),
-          Expanded(
-              flex: 1,
-              child: Container(
-                width: 450,
-                //color: Colors.blue,
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Card(
-                    elevation: 10,
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: Image.network(
-                          Dispalydata.imgUrl,
-                          fit: BoxFit.cover,
-                        )),
-                  ),
-                ),
-              )),
-          Expanded(
-              flex: 2,
-              child: Container(
-                //color: const Color.fromARGB(255, 101, 111, 119),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: 1000,
-                      //color: Colors.deepPurple,
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          Dispalydata.name,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Card(
-                          elevation: 5,
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            // child: Text(
-                            //   Dispalydata.Detail.FoodDetails,
-                            //   style: TextStyle(fontSize: 20),
-                            // ),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ))
-        ],
-      ),
-    );
+        ));
   }
 }
