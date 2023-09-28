@@ -1,23 +1,38 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:alice/alice.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Modal/modal.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/Src/Appscreens/Modals/product.dart';
+import 'package:my_app/main.dart';
 
 class productController extends GetxController {
+  Alice alice = Alice();
   var Total = "0".obs;
   var checkoutdata = [].obs;
   var ResposeLists = <Products>[].obs;
   var Cart = [].obs;
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    fetchdata();
+    super.onInit();
+    alice = Alice(navigatorKey: navkey);
+  }
+
+  showInspector() {
+    alice.showInspector();
+  }
+
   fetchdata() async {
     //print("fetching");
     var url =
         'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Product.json';
     var res = await http.get(Uri.parse(url));
+    alice.onHttpResponse(res);
     if (res.statusCode == 200) {
       var stringdata = res.body;
       ResposeLists.value = productsFromJson(stringdata);
@@ -102,7 +117,7 @@ class productController extends GetxController {
     totalPrice();
   }
 
-  buyProduct() {
+  buyProduct() async {
     var details = new Map();
     if (Cart.isNotEmpty) {
       details["TotalPrice"] = Total.value;
@@ -110,13 +125,14 @@ class productController extends GetxController {
       //print("calling");
       var url =
           'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Cart.json';
-      http.post(
+      var postdata = await http.post(
         Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(details),
       );
+      alice.onHttpResponse(postdata);
       return clearCart();
     } else {
       return;
@@ -148,12 +164,5 @@ class productController extends GetxController {
     });
 
     //fetchdata();
-  }
-
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    fetchdata();
-    super.onInit();
   }
 }

@@ -1,8 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Src/Appscreens/BottumBar/Bottumbar.dart';
 import 'package:my_app/Src/Appscreens/Category/Categorys.dart';
 import 'package:my_app/Src/Appscreens/RecentOrders/Recentorder.dart';
+import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
+import 'package:my_app/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DashBoard extends StatefulWidget {
@@ -23,7 +26,7 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   Widget build(BuildContext context) {
-    //var mycontroller = Get.put(productController());
+    var mycontroller = Get.put(productController());
     return Scaffold(
         // appBar: AppBar(
         //   toolbarHeight: 40,
@@ -37,7 +40,7 @@ class _DashBoardState extends State<DashBoard> {
             children: [
               Expanded(
                   flex: 2,
-                  child: Stack(children: [
+                  child: Stack(key: parentKey, children: [
                     SizedBox(
                       width: Get.width,
                       height: 200,
@@ -62,6 +65,7 @@ class _DashBoardState extends State<DashBoard> {
                         ),
                       ],
                     ),
+                    Container(child: inspector(mycontroller))
                   ])),
               MyCategory(),
               const Padding(
@@ -78,6 +82,29 @@ class _DashBoardState extends State<DashBoard> {
             ]),
         // drawer: MyDrawer(),
         bottomNavigationBar: const BottumTabBar());
+  }
+
+  dynamic inspector(productController mycontroller) {
+    if (kDebugMode) {
+      return Positioned(
+        top: 190,
+        left: 300,
+        child: FloatingActionButton(
+          onPressed: () {
+            mycontroller.showInspector();
+          },
+          child: const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("check"),
+              Text("Apis"),
+            ],
+          ),
+        ),
+      );
+    } else {
+      return null;
+    }
   }
 
   Card _Card() {

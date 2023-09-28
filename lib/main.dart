@@ -3,6 +3,11 @@ import 'package:get/get.dart';
 import 'package:my_app/Src/Appscreens/Dashboard/Homepage.dart';
 import 'package:my_app/Src/Appscreens/LoginScreen/Loginpage/login.dart';
 
+//GlobalKey for navigation
+GlobalKey<NavigatorState> navkey = Get.key;
+
+//
+final GlobalKey parentKey = GlobalKey();
 void main() {
   runApp(const Myapp());
 }

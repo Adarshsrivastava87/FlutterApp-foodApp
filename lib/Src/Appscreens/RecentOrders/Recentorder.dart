@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_app/Src/Appscreens/Dashboard/network_logger.dart';
 import 'package:my_app/Src/Appscreens/Dashboard/orderReview.dart';
 import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
 
@@ -120,9 +121,10 @@ class _MyrecentOrdersState extends State<MyrecentOrders> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  Get.to(() => ReviewOrder(
-                                        Dispalydata: user.ResposeLists[index],
-                                      ));
+                                  // Get.to(() => ReviewOrder(
+                                  //       Dispalydata: user.ResposeLists[index],
+                                  //     ));
+                                  Get.to(() => Netwoklog());
                                 },
                                 child: Container(
                                   height: 40,
