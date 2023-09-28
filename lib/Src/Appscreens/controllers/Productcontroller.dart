@@ -6,10 +6,10 @@ import 'package:get/get.dart';
 import 'package:my_app/Modal/modal.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/Src/Appscreens/Modals/product.dart';
-import 'package:my_app/main.dart';
+import 'package:my_app/Src/Appscreens/inspector.dart';
 
 class productController extends GetxController {
-  Alice alice = Alice();
+  var inspector = Get.put(Apiinspector());
   var Total = "0".obs;
   var checkoutdata = [].obs;
   var ResposeLists = <Products>[].obs;
@@ -20,11 +20,6 @@ class productController extends GetxController {
     // TODO: implement onInit
     fetchdata();
     super.onInit();
-    alice = Alice(navigatorKey: navkey);
-  }
-
-  showInspector() {
-    alice.showInspector();
   }
 
   fetchdata() async {
@@ -32,14 +27,13 @@ class productController extends GetxController {
     var url =
         'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Product.json';
     var res = await http.get(Uri.parse(url));
-    alice.onHttpResponse(res);
+    inspector.AddApiresponse(res);
+    //alice.onHttpResponse(res);
     if (res.statusCode == 200) {
       var stringdata = res.body;
       ResposeLists.value = productsFromJson(stringdata);
     }
   }
-
-  checkdata() {}
 
   addItems(item) {
     print("check added item ${item.quantity}");
@@ -132,7 +126,7 @@ class productController extends GetxController {
         },
         body: jsonEncode(details),
       );
-      alice.onHttpResponse(postdata);
+      inspector.AddApiresponse(postdata);
       return clearCart();
     } else {
       return;

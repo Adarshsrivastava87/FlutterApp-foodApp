@@ -2,19 +2,12 @@ import 'package:alice/alice.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/Src/Appscreens/Modals/category.dart';
+import 'package:my_app/Src/Appscreens/inspector.dart';
 import 'package:my_app/main.dart';
 
 class categoryController extends GetxController {
+  var inspector = Get.put(Apiinspector());
   List CategoryData = [].obs;
-  Alice alice = Alice();
-  @override
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    print('============>');
-    super.onInit();
-    alice = Alice(showNotification: true, navigatorKey: navkey);
-  }
 
   fetchCategoryData() async {
     var url =
@@ -23,8 +16,7 @@ class categoryController extends GetxController {
     if (res.statusCode == 200) {
       CategoryData = categorymodalFromJson(res.body);
     }
-    alice.onHttpResponse(res);
-    alice.showInspector();
+    inspector.AddApiresponse(res);
     print("=====>${CategoryData[0].name}");
   }
 }

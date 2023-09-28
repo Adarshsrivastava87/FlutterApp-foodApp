@@ -5,6 +5,7 @@ import 'package:my_app/Src/Appscreens/BottumBar/Bottumbar.dart';
 import 'package:my_app/Src/Appscreens/Category/Categorys.dart';
 import 'package:my_app/Src/Appscreens/RecentOrders/Recentorder.dart';
 import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
+import 'package:my_app/Src/Appscreens/inspector.dart';
 import 'package:my_app/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -26,7 +27,7 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   Widget build(BuildContext context) {
-    var mycontroller = Get.put(productController());
+    var inspectcontroller = Get.put(Apiinspector());
     return Scaffold(
         // appBar: AppBar(
         //   toolbarHeight: 40,
@@ -65,7 +66,7 @@ class _DashBoardState extends State<DashBoard> {
                         ),
                       ],
                     ),
-                    Container(child: inspector(mycontroller))
+                    Container(child: inspector(inspectcontroller))
                   ])),
               MyCategory(),
               const Padding(
@@ -84,14 +85,15 @@ class _DashBoardState extends State<DashBoard> {
         bottomNavigationBar: const BottumTabBar());
   }
 
-  dynamic inspector(productController mycontroller) {
+  dynamic inspector(Apiinspector controller) {
     if (kDebugMode) {
       return Positioned(
         top: 190,
         left: 300,
         child: FloatingActionButton(
           onPressed: () {
-            mycontroller.showInspector();
+            // mycontroller.showInspector();
+            controller.navigateToInspector();
           },
           child: const Column(
             mainAxisAlignment: MainAxisAlignment.center,
