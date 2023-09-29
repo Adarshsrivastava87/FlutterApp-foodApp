@@ -8,7 +8,7 @@ class Apiinspector extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    alice = Alice(navigatorKey: navkey);
+    alice = Alice(showNotification: false, navigatorKey: navkey);
   }
 
   navigateToInspector() {
