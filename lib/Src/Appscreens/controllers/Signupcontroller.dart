@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
+import 'package:my_app/Src/Appscreens/inspector.dart';
 
 class Signup extends GetxController {
+  var Apilog = Get.put(Apiinspector());
   var newusername = "".obs;
   var newuserpassword = "".obs;
   final RxBool showpassword = true.obs;
@@ -32,14 +37,16 @@ class Signup extends GetxController {
         {"name": newusername.value, "password": newuserpassword.value}.obs;
 
     arry.add(userData);
-    //var url ='https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Newusers.json';
-    // http.post(
-    //   Uri.parse(url),
-    //   headers: <String, String>{
-    //     'Content-Type': 'application/json; charset=UTF-8',
-    //   },
-    //   body: jsonEncode(arry.toJson()),
-    // );
+    var url =
+        'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Newusers.json';
+    var addinguser = await http.post(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(arry.toJson()),
+    );
+    Apilog.AddApiresponse(addinguser);
     return;
   }
 }
