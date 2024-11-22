@@ -24,7 +24,7 @@ class UserLogindata extends GetxController {
   Fetchdata() async {
     print("fetching");
     var url =
-        'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Producst.json';
+        'https://foodapp-b31b9-default-rtdb.asia-southeast1.firebasedatabase.app/Product.json';
     var res = await http.get(Uri.parse(url));
     if (res.statusCode == 200) {
       var stringdata = res.body;
@@ -35,15 +35,39 @@ class UserLogindata extends GetxController {
   checkdata() {}
 
   var Cart = [].obs;
+  // addItems(item) {
+  //   print("check");
+  //   var data = FoodListCart(
+  //       imgUrl: item.imgUrl,
+  //       Id: item.id,
+  //       Price: item.price,
+  //       name: item.name,
+  //       quantity: item.quantity);
+  //   Cart.add(data);
+  //   print(Cart);
+  // }
+
   addItems(item) {
     print("check");
-    var data = FoodListCart(
+
+    // Check if the item already exists in the cart
+    int existingIndex = Cart.indexWhere((cartItem) => cartItem.Id == item.id);
+
+    if (existingIndex != -1) {
+      // If the item exists, increase its quantity
+      Cart[existingIndex].quantity += item.quantity;
+    } else {
+      // If the item doesn't exist, add it to the cart
+      var data = FoodListCart(
         imgUrl: item.imgUrl,
         Id: item.id,
         Price: item.price,
         name: item.name,
-        quantity: item.quantity);
-    Cart.add(data);
+        quantity: item.quantity,
+      );
+      Cart.add(data);
+    }
+
     print(Cart);
   }
 

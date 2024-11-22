@@ -14,47 +14,176 @@ class _MyCartState extends State<MyCart> {
   //=====
 
   showAlertDialog(BuildContext context) {
-    // set up the buttons
-    Widget cancelButton = TextButton(
-      child: const Text("Cancel"),
-      onPressed: () {
-        Navigator.pop(context, true);
-      },
-    );
-    Widget continueButton = TextButton(
-      child: const Text("Order"),
-      onPressed: () {
-        controller.BuyProduct();
-        Navigator.pop(context, true);
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: const Text("Thank you for shopping with us!"),
-      content: Container(
-        height: 50,
-        child: Row(
+    if (controller.Total.value == "0") {
+      // Alert box for zero total price
+      AlertDialog zeroPriceAlert = AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        title: Row(
           children: [
-            const Text("Total Price :"),
-            Text("${controller.Total}Rs"),
+            const Icon(Icons.info_outline, color: Colors.red, size: 30),
+            const SizedBox(width: 10),
+            const Expanded(
+              child: Text(
+                "Cart is Empty!",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                ),
+              ),
+            ),
           ],
         ),
-      ),
-      actions: [
-        cancelButton,
-        continueButton,
-      ],
-    );
+        content: const Text(
+          "You have no items in your cart. Please add some items before proceeding.",
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.black87,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        actionsPadding:
+            const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        actions: [
+          Center(
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: const Text(
+                "Close",
+                style: TextStyle(fontSize: 16, color: Colors.white),
+              ),
+            ),
+          ),
+        ],
+      );
 
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
+      // Show the zero-price dialog
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return zeroPriceAlert;
+        },
+      );
+    } else {
+      // Regular alert box for non-zero total price
+      Widget cancelButton = TextButton(
+        child: const Text(
+          "Cancel",
+          style: TextStyle(color: Colors.red, fontSize: 16),
+        ),
+        onPressed: () {
+          Navigator.pop(context, true);
+        },
+      );
+
+      Widget continueButton = ElevatedButton(
+        onPressed: () {
+          controller.BuyProduct();
+          Navigator.pop(context, true);
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.orange,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        ),
+        child: const Text(
+          "Place Order",
+          style: TextStyle(fontSize: 16, color: Colors.white),
+        ),
+      );
+
+      AlertDialog nonZeroPriceAlert = AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        title: Row(
+          children: [
+            const Icon(Icons.shopping_bag, color: Colors.orange, size: 30),
+            const SizedBox(width: 10),
+            const Expanded(
+              child: Text(
+                "Thank You for Shopping!",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.teal,
+                ),
+              ),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Divider(),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Total Price:",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Text(
+                  "${controller.Total} Rs",
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.teal,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              "Would you like to proceed with the order?",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey,
+              ),
+            ),
+          ],
+        ),
+        actionsPadding:
+            const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              cancelButton,
+              continueButton,
+            ],
+          ),
+        ],
+      );
+
+      // Show the non-zero price dialog
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return nonZeroPriceAlert;
+        },
+      );
+    }
   }
+
 //====
 
   @override

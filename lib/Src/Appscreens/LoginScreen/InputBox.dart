@@ -19,7 +19,7 @@ class InputBox extends StatelessWidget {
           //suffixIcon: secureText ? Icon(Icons.password) : null,
           prefixIcon: secureText
               ? Icon(Icons.password)
-              : Icon(Icons.card_giftcard_rounded)),
+              : Icon(Icons.account_circle_rounded)),
       onChanged: (v) => secureText
           ? Controller.setUserpassword(v)
           : Controller.setUsername(v),

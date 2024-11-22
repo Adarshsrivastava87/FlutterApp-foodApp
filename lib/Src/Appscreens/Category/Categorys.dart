@@ -4,6 +4,8 @@ import 'package:my_app/Src/Appscreens/Details/detailpage.dart';
 import 'package:my_app/Src/Appscreens/LoginScreen/Userloginstate.dart';
 import 'package:my_app/Src/Appscreens/controllers/Productcontroller.dart';
 
+import '../Dashboard/orderReview.dart';
+
 // ignore: must_be_immutable
 class MyCategory extends StatelessWidget {
   MyCategory({super.key});
@@ -13,7 +15,7 @@ class MyCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: non_constant_identifier_names
     MoveTo(details) {
-      Get.to(() => OrderDetailView(), arguments: details);
+      Get.to(() => ReviewOrder(Dispalydata: details));
     }
 
     return Obx(
